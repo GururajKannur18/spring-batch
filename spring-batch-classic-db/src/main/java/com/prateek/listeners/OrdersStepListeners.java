@@ -8,6 +8,7 @@ import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class OrdersStepListeners implements StepExecutionListener{
 	@Autowired
+	@Qualifier("primaryDataSource")
 	private DataSource dataSource;
 	
 	

@@ -21,6 +21,7 @@ import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
 import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,9 +42,12 @@ import lombok.extern.slf4j.Slf4j;
 public class PaymentsJob {
 	@Autowired
 	private JobBuilderFactory jobBuilderFactory;
+	
 	@Autowired
 	private StepBuilderFactory stepBuilderFactory;
+	
 	@Autowired
+	@Qualifier("primaryDataSource")
 	private DataSource dataSource;
 
 	@Bean
@@ -128,6 +132,7 @@ public class PaymentsJob {
 		
 		FlatFileItemWriter<Payments> reader = new FlatFileItemWriter<>();
 		reader.setResource(new FileSystemResource("csv/outputs/users.processed" + fromId + "-" + toId + ".csv"));
+		reader.setAppendAllowed(true);
 
 		reader.setLineAggregator(new DelimitedLineAggregator<Payments>() {
 			{
