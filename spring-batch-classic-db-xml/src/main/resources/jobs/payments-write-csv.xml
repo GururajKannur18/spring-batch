@@ -60,8 +60,8 @@
 		<!-- Inject via the ExecutionContext in rangePartitioner -->
 		<property name="parameterValues">
 			<map>
-				<entry key="fromId" value="stepExecutionContext[fromId]" />
-				<entry key="toId" value="stepExecutionContext[toId]" />
+				<entry key="fromId" value="#{stepExecutionContext[fromId]}" />
+				<entry key="toId" value="#{stepExecutionContext[toId]}" />
 			</map>
 		</property>
 		<property name="rowMapper">
