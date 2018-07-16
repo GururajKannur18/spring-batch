@@ -49,6 +49,7 @@
 	
 	
 	<bean id="custFlatFileCallBack" class="com.prateek.callback.CustomerFlatFileWriterCallback" />
+	
 	<bean id="customerDecider" class ="com.prateek.step.decider.CustomerDecider">
 		<constructor-arg name="dataSource" ref="dataSource" />
 	</bean>

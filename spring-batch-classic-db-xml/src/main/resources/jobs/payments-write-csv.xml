@@ -53,7 +53,13 @@
 				<property name="dataSource" ref="dataSource" />
 				<property name="selectClause" value="SELECT customerNumber, checkNumber,paymentDate,amount" />
 				<property name="fromClause" value="FROM classicmodels.payments" />
-				<property name="whereClause" value="${payments.query.where.clause}" />
+				<!-- <property name="whereClause" value="${payments.query.where.clause}" /> --> <!-- This also works -->
+				<property name="whereClause">
+					<value>
+						<![CDATA[ WHERE customerNumber >= :fromId AND customerNumber <= :toId ]]>
+					</value>
+				</property>
+				
 				<property name="sortKey" value="customerNumber" />
 			</bean>
 		</property>

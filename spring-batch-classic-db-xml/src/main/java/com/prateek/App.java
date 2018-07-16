@@ -10,24 +10,27 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
 	public static void main(String[] args) {
-		String[] springConfig = { "config/database.xml", "config/context.xml", "jobs/customer-write-csv.xml" ,"jobs/payments-write-csv.xml", "jobs/report-job.xml"};
+		String[] springConfig = { "config/database.xml", "config/context.xml", "jobs/customer-write-csv.xml" ,"jobs/payments-write-csv.xml", 
+				"jobs/product-redis-writer.xml"};
 
 		ApplicationContext context = new ClassPathXmlApplicationContext(springConfig);
 
 		JobLauncher jobLauncher = (JobLauncher) context.getBean("jobLauncher");
 		//Job job = (Job) context.getBean("customerJob");
 		//Job job = (Job) context.getBean("paymentsPartitionJob");
-		Job job = (Job) context.getBean("reportJob");
+		//Job job = (Job) context.getBean("reportJob");
+		Job job = (Job) context.getBean("productRedisJob");
+		
 				
 		try {
 			
-			JobParameters jobParameter = new JobParametersBuilder().addString("runMode", "My_Sample_Customer").toJobParameters();
+			//JobParameters jobParameter = new JobParametersBuilder().addString("runMode", "My_Sample_Customer").toJobParameters();
 
-			JobExecution execution = jobLauncher.run(job, jobParameter);
+			JobExecution execution = jobLauncher.run(job, new JobParameters());
 			System.out.println("############## Exit Status : " + execution.getStatus());
 			System.out.println("############## Exit Status : " + execution.getAllFailureExceptions());
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Exceptioj in main method :: "+e.getMessage());
 		}
 
 		System.out.println("Done");

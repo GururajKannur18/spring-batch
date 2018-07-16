@@ -12,6 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import lombok.Data;
+
+
+@Data
 public class CustomerDecider implements JobExecutionDecider {
 
 	private JdbcTemplate jdbcTemplate;
